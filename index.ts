@@ -36,9 +36,7 @@ const packs = {
         click5: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/click5.wav"),
         click6: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/click6.wav"),
         click7: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/click7.wav"),
-        allowedKeys: [
-            "Space"
-        ]
+        allowedKeys: []
     }
 };
 
