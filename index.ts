@@ -26,7 +26,8 @@ const packs = {
             "ArrowDown"
         ]
     },
-    "Lethal Company": {
+    "Lethal Company": {  
+        enter: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/enter.wav"),
         backspace: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/backspace.wav"),
         space: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/space.wav"),
         click1: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/click1.wav"),
