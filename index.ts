@@ -25,6 +25,19 @@ const packs = {
             "ArrowLeft",
             "ArrowDown"
         ]
+    },
+    "Lethal Company": {  
+        enter: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/enter.wav"),
+        backspace: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/backspace.wav"),
+        space: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/space.wav"),
+        click1: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/click1.wav"),
+        click2: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/click2.wav"),
+        click3: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/click3.wav"),
+        click4: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/click4.wav"),
+        click5: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/click5.wav"),
+        click6: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/click6.wav"),
+        click7: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/click7.wav"),
+        allowedKeys: []
     }
 };
 
@@ -71,6 +84,10 @@ const keydown = (e: KeyboardEvent) => {
         case "Backspace":
             currentPack.backspace.currentTime = 0;
             currentPack.backspace.play();
+            break;
+        case "Space":
+            currentPack.space.currentTime = 0;
+            currentPack.space.play();
             break;
         case "CapsLock":
             currentPack.caps.currentTime = 0;
