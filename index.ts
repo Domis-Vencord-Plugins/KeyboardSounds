@@ -25,6 +25,21 @@ const packs = {
             "ArrowLeft",
             "ArrowDown"
         ]
+    },
+    "Lehtal Company": {
+        enter: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSoounds/raw/main/sounds/LehtalCompany/enter.wav"),
+        backspace: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSoounds/raw/main/sounds/LehtalCompany/backspace.wav"),
+        space: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSoounds/raw/main/sounds/LehtalCompany/space.wav"),
+        click1: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSoounds/raw/main/sounds/LehtalCompany/click1.wav"),
+        click2: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSoounds/raw/main/sounds/LehtalCompany/click2.wav"),
+        click3: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSoounds/raw/main/sounds/LehtalCompany/click3.wav"),
+        click4: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSoounds/raw/main/sounds/LehtalCompany/click4.wav"),
+        click5: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSoounds/raw/main/sounds/LehtalCompany/click5.wav"),
+        click6: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSoounds/raw/main/sounds/LehtalCompany/click6.wav"),
+        click7: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSoounds/raw/main/sounds/LehtalCompany/click7.wav"),
+        allolwedKeys: [
+            "Space"
+        ]
     }
 };
 
@@ -71,6 +86,10 @@ const keydown = (e: KeyboardEvent) => {
         case "Backspace":
             currentPack.backspace.currentTime = 0;
             currentPack.backspace.play();
+            break;
+        case "Space":
+            currentPack.space.currentTime = 0;
+            currentPack.space.play();
             break;
         case "CapsLock":
             currentPack.caps.currentTime = 0;
