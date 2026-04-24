@@ -1,5 +1,5 @@
 import definePlugin, { OptionType } from "@utils/types";
-import { Settings } from "Vencord";
+import { definePluginSettings } from "@api/Settings";
 
 const packs = {
     "OperaGX": {
@@ -26,7 +26,7 @@ const packs = {
             "ArrowDown"
         ]
     },
-    "Lethal Company": {  
+    "Lethal Company": {
         enter: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/enter.wav"),
         backspace: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/backspace.wav"),
         space: new Audio("https://github.com/Domis-Vencord-Plugins/KeyboardSounds/raw/main/sounds/LethalCompany/space.wav"),
@@ -67,10 +67,8 @@ const ignoredKeys = [
     "AudioVolumeDown"
 ];
 
-const getActiveSoundPack = () => Settings.plugins.KeyboardSounds.pack;
-
 const keydown = (e: KeyboardEvent) => {
-    const currentPack = packs[getActiveSoundPack()];
+    const currentPack = packs[settings.store.pack];
     if (ignoredKeys.includes(e.code) && !currentPack.allowedKeys.includes(e.code)) return;
 
     for (const sound of Object.values(currentPack))
@@ -109,47 +107,49 @@ const keydown = (e: KeyboardEvent) => {
     }
 };
 
+const settings = definePluginSettings({
+    pack: {
+        description: "Select the Sound Pack you want to use",
+        type: OptionType.SELECT,
+        options: Object.keys(packs).map((pack, i) => {
+            return {
+                label: pack,
+                value: pack,
+                default: i === 0
+            }
+        }),
+        onChange: () => {
+            const volume = settings.store.volume;
+            const currentPack = packs[settings.store.pack];
+            for (const sound of Object.values(currentPack))
+                if (sound instanceof Audio) sound.volume = volume / 100;
+        }
+    },
+    volume: {
+        description: "Volume",
+        type: OptionType.SLIDER,
+        markers: [0, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        stickToMarkers: false,
+        default: 100,
+        onChange: value => {
+            const currentPack = packs[settings.store.pack];
+            for (const sound of Object.values(currentPack))
+                if (sound instanceof Audio) sound.volume = value / 100;
+        }
+    }
+});
+
 export default definePlugin({
     name: "KeyboardSounds",
     description: "Adds the Opera GX Keyboard Sounds to Discord",
     authors: [{ name: "domi.btnr", id: 354191516979429376n }],
     start: () => {
-        const volume = Settings.plugins.KeyboardSounds.volume;
-        const currentPack = packs[getActiveSoundPack()];
+        const volume = settings.store.volume;
+        const currentPack = packs[settings.store.pack];
         for (const sound of Object.values(currentPack))
             if (sound instanceof Audio) sound.volume = volume / 100;
         document.addEventListener("keydown", keydown);
     },
     stop: () => document.removeEventListener("keydown", keydown),
-    options: {
-        pack: {
-            description: "Select the Sound Pack you want to use",
-            type: OptionType.SELECT,
-            options: Object.keys(packs).map((pack, i) => {
-                return {
-                    label: pack,
-                    value: pack,
-                    default: i === 0
-                }
-            }),
-            onChange: () => {
-                const volume = Settings.plugins.KeyboardSounds.volume;
-                const currentPack = packs[getActiveSoundPack()];
-                for (const sound of Object.values(currentPack))
-                    if (sound instanceof Audio) sound.volume = volume / 100;
-            }
-        },
-        volume: {
-            description: "Volume",
-            type: OptionType.SLIDER,
-            markers: [0, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-            stickToMarkers: false,
-            default: 100,
-            onChange: value => {
-                const currentPack = packs[getActiveSoundPack()];
-                for (const sound of Object.values(currentPack))
-                    if (sound instanceof Audio) sound.volume = value / 100;
-            }
-        }
-    }
+    settings
 });
