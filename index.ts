@@ -65,11 +65,11 @@ export default definePlugin({
 
     start() {
         startAudio();
-        document.addEventListener("keydown", onKeyDown);
+        document.addEventListener("keydown", onKeyDown, true);
     },
 
     stop() {
-        document.removeEventListener("keydown", onKeyDown);
+        document.removeEventListener("keydown", onKeyDown, true);
         stopAudio();
     }
 });
